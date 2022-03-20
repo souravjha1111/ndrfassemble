@@ -14,7 +14,7 @@ SECRET_KEY = '=nac$fwomdn210l54pj1!j3ah*-m53h-l0qghxq^+e7+$h$((3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'api',
     'rest_framework',
-
     'django.contrib.staticfiles',
 ]
 
