@@ -12,6 +12,7 @@ class Profile(models.Model):
     username = models.CharField(max_length=100, blank=False)
     phone_number = models.IntegerField(default=0, blank=False)
     age = models.IntegerField(default=22, blank=False)
+    email = models.EmailField(default="admin@gmail.com", blank=False)
     generallocationlatitude = models.CharField(max_length=100, blank=False)
     generallocationlongitude = models.CharField(max_length=100, blank=False)
     currentlocationlatitude = models.CharField(max_length=100, blank=False)
