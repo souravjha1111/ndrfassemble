@@ -16,6 +16,5 @@ urlpatterns = [
     # url('getallactivejobdataforuser/(?P<pk>[0-9]+)',views.getallactivejobdataforuser,name='getallactivejobdataforuser'),
     # url('workerhomepagedata/(?P<pk>[0-9]+)',views.workerhomepagedata,name='workerhomepagedata'),
     url('logininfo/',views.logininfo,name='logininfo'),
-
-
+    url('sendmail/',views.sendmail,name='sendmail'),
 ]

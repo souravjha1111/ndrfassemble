@@ -1,4 +1,5 @@
 from calendar import c
+import profile
 from django.http import response
 from .serializers import  Profileserializer, FeedDataModelSerializer
 from rest_framework.response import Response
@@ -7,7 +8,8 @@ from rest_framework.decorators import api_view
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 
-
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 @api_view(['GET', 'POST', 'DELETE'])
@@ -124,60 +126,18 @@ def eventattendiesdata(request, pk):   #single user data
 
 
 
-# @api_view(['GET', 'POST', 'DELETE'])
-# @csrf_exempt
-# def workerdataapi(request, pk):
-#     if request.method == 'GET':
-#         orders = worker.objects.all()
-#         serializer = workerserializer(orders,many = True)
-#         return Response(serializer.data)
-
-#     if request.method == 'POST':
-#         serializer  = workerserializer(data = request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         else:
-#             return Response(serializer.errors)
-
-#     # elif request.method == 'DELETE':
-#     #     worker.objects.get(pk=pk).delete()
-#     #     return Response(status = 200)
-
-# @api_view(['DELETE'])
-# def deleteWorkerData(request,pk):
-#     if request.method == 'DELETE': #delete user
-#         Profile.objects.get(pk=pk).delete()
-#         return Response(status = 200)
 
 
-# @api_view(['GET', 'POST', 'DELETE'])
-# @csrf_exempt
-# def getsingleworkerdata(request, pk):   #single user data
-#     if request.method == 'GET':
-#         userdata = worker.objects.get(pk = pk)
-#         serializer = workerserializer(userdata)
-#         return Response(serializer.data)
-
-
-
-# @api_view(['GET', 'POST', 'DELETE'])
-# @csrf_exempt
-# def getallactivejobdataforuser(request, pk):   #activejob data for user
-#     if request.method == 'GET':
-#         userdata = worker.objects.get(pk = pk).filter(activestatus = True)
-#         serializer = workerserializer(userdata)
-#         return Response(serializer.data)
-
-
-# @api_view(['GET', 'POST', 'DELETE'])
-# @csrf_exempt
-# def workerhomepagedata(request, pk):   #worker home page data
-#     if request.method == 'GET':
-#         userdata = Profile.objects.get(id = pk)
-#         serializer1 = Profileserializer(userdata)
-#         workerskill = serializer1.data['skill']
-#         print(workerskill)
-#         print("adfasdfasdfasdf#############################################")
-#         serializer = jobpost.objects.all()
-#         return Response(serializer.data)
+@api_view(['GET', 'POST', 'DELETE'])
+@csrf_exempt
+def sendmail(request):
+    if request.method == 'GET':
+        emaillist = Profile.objects.all().values_list('email', flat=True)
+        print(emaillist)
+        send_mail(
+        subject='Need help on your event',
+        message='Hello please open your ndrf assemble app we need your help',
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=emaillist)
+    
+    return Response(status = 200)

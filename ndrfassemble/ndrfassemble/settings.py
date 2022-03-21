@@ -111,3 +111,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='nevergiveupsj408@gmail.com'
+EMAIL_HOST_PASSWORD='Anand@8527'
+RECIPIENT_ADDRESS='dakshdudeja3@gmail.com'
+
